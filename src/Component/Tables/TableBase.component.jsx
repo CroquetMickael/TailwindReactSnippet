@@ -8,6 +8,7 @@ const TableBase = (props) => (
       head={props.head}
       sort={props.sort}
       requestSort={props.requestSort}
+      sortConfig={props.sortConfig}
     />
     <tbody>{props.children}</tbody>
   </table>

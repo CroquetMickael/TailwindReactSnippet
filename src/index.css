@@ -16,3 +16,13 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+th.ascending::after {
+  content: '👇';
+  margin-left: 1em;
+}
+
+th.descending::after {
+  content: '☝️';
+  margin-left: 1em;
+}

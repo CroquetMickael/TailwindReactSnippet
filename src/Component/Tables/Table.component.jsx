@@ -15,10 +15,16 @@ const Table = (props) => {
     currentPage,
     jump,
   } = usePagination(props.data, props.itemsPerPage);
-  const { items, requestSort } = useSortableData(currentData(props.paginated));
+  const { items, requestSort, sortConfig } = useSortableData(
+    currentData(props.paginated)
+  );
   return (
     <>
-      <TableBase head={props.head} requestSort={requestSort}>
+      <TableBase
+        head={props.head}
+        requestSort={requestSort}
+        sortConfig={sortConfig}
+      >
         {items.map((data) => {
           return (
             <tr>
