@@ -7,6 +7,7 @@ import { TableBase } from "../Tables/TableBase.component";
 import { TableTd } from "../Tables/TableTd.component";
 
 const Table = (props) => {
+  const { items, requestSort, sortConfig } = useSortableData(props.data);
   const {
     currentData,
     nextPage,
@@ -14,10 +15,7 @@ const Table = (props) => {
     maxPage,
     currentPage,
     jump,
-  } = usePagination(props.data, props.itemsPerPage);
-  const { items, requestSort, sortConfig } = useSortableData(
-    currentData(props.paginated)
-  );
+  } = usePagination(items, props.itemsPerPage);
   return (
     <>
       <TableBase
@@ -25,7 +23,7 @@ const Table = (props) => {
         requestSort={requestSort}
         sortConfig={sortConfig}
       >
-        {items.map((data) => {
+        {currentData(items).map((data) => {
           return (
             <tr>
               {props.head.map((head) => (

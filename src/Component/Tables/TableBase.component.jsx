@@ -6,7 +6,6 @@ const TableBase = (props) => (
   <table className="min-w-full leading-normal">
     <TableHead
       head={props.head}
-      sort={props.sort}
       requestSort={props.requestSort}
       sortConfig={props.sortConfig}
     />
