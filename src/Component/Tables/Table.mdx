@@ -1,0 +1,32 @@
+---
+name: Table
+route: /Table
+---
+
+# Table component
+
+<Props of={Table} />
+
+
+import { Playground, Props } from "docz";
+import tableData from "../../Mock/Table.json";
+import { Table } from "./Table.component";
+
+## Basic usage
+
+<Playground>
+  <Table
+    data={tableData}
+    itemsPerPage={4}
+    paginated={true}
+    options={{
+      NumberItemsOptions: { permitChange: true, options: [4, 8, 12] },
+    }}
+    head={[
+      { show: "Nom", value: "nom", sort: true },
+      { show: "Prénom", value: "prenom", sort: true },
+      { show: "Age", value: "age", sort: true },
+      { show: "Actif", value: "actif", sort: false },
+    ]}
+  />
+</Playground>
