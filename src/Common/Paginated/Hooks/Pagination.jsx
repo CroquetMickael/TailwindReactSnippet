@@ -1,13 +1,13 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 function usePagination(data, itemsPerPage) {
   const [currentPage, setCurrentPage] = useState(1);
-  const maxPage = Math.ceil(data.length / itemsPerPage);
 
+  const maxPage = Math.ceil(data.length / parseInt(itemsPerPage));
   function currentData(paginated) {
-    if(paginated !== false){
-      const begin = (currentPage - 1) * itemsPerPage;
-      const end = begin + itemsPerPage;
+    if (paginated !== false) {
+      const begin = (currentPage - 1) * parseInt(itemsPerPage);
+      const end = begin + parseInt(itemsPerPage);
       return data.slice(begin, end);
     }
     return data;
@@ -26,7 +26,14 @@ function usePagination(data, itemsPerPage) {
     setCurrentPage((currentPage) => Math.min(pageNumber, maxPage));
   }
 
-  return { nextPage, previousPage, jump, currentData, currentPage, maxPage };
+  return {
+    nextPage,
+    previousPage,
+    jump,
+    currentData,
+    currentPage,
+    maxPage,
+  };
 }
 
 export { usePagination };

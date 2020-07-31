@@ -9,6 +9,7 @@ function App() {
         data={tableData}
         itemsPerPage={4}
         paginated={true}
+        options={{ NumberItemsOptions: { permitChange: true, options: [4,8,12]} }}
         head={[
           { show: "Nom", value: "nom", sort: true },
           { show: "Prénom", value: "prenom", sort: true },

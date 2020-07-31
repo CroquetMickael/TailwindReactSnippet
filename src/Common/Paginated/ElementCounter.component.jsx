@@ -15,11 +15,16 @@ const ElementCounter = (props) => {
   };
 
   return (
-    <span className="text-xs text-gray-900 xs:text-sm">
-      Showing {numberOfElement()} to{" "}
-      {(props.itemsLength / props.maxPage) * props.currentPage} of{" "}
-      {props.itemsLength} Entries
-    </span>
+    <>
+      <p className="text-xs">
+        Page {props.currentPage} of {props.maxPage}
+      </p>
+      <span className="text-xs text-gray-900 xs:text-sm">
+        Showing {numberOfElement()} to{" "}
+        {(props.itemsLength / props.maxPage) * props.currentPage} of{" "}
+        {props.itemsLength} Entries
+      </span>
+    </>
   );
 };
 
