@@ -1,6 +1,6 @@
 import React from "react";
 
-const PaginatedTableCounter = (props) => {
+const ElementCounter = (props) => {
   const numberOfElement = () => {
     if (props.currentPage !== 1) {
       return (
@@ -15,7 +15,7 @@ const PaginatedTableCounter = (props) => {
   };
 
   return (
-    <span className="text-xs xs:text-sm text-gray-900">
+    <span className="text-xs text-gray-900 xs:text-sm">
       Showing {numberOfElement()} to{" "}
       {(props.itemsLength / props.maxPage) * props.currentPage} of{" "}
       {props.itemsLength} Entries
@@ -23,4 +23,4 @@ const PaginatedTableCounter = (props) => {
   );
 };
 
-export { PaginatedTableCounter };
+export { ElementCounter };

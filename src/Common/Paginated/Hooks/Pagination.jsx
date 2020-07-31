@@ -4,10 +4,13 @@ function usePagination(data, itemsPerPage) {
   const [currentPage, setCurrentPage] = useState(1);
   const maxPage = Math.ceil(data.length / itemsPerPage);
 
-  function currentData() {
-    const begin = (currentPage - 1) * itemsPerPage;
-    const end = begin + itemsPerPage;
-    return data.slice(begin, end);
+  function currentData(paginated) {
+    if(paginated !== false){
+      const begin = (currentPage - 1) * itemsPerPage;
+      const end = begin + itemsPerPage;
+      return data.slice(begin, end);
+    }
+    return data;
   }
 
   function nextPage() {

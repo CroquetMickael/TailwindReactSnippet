@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const PaginatedTablePageSelect = (props) => {
+const PageSelect = (props) => {
   const [pageChoose, setPageChoose] = useState();
   const choosingPage = (event) => {
     if (event.key === "Enter") {
@@ -10,19 +10,19 @@ const PaginatedTablePageSelect = (props) => {
   return (
     <div className="inline-flex mt-2 xs:mt-0">
       <button
-        className="text-sm bg-blue-200 hover:bg-blue-300 text-gray-800 font-semibold py-2 px-4 rounded-l"
+        className="px-4 py-2 text-sm font-semibold text-gray-800 bg-blue-200 rounded-l hover:bg-blue-300"
         onClick={() => props.previousPage()}
       >
         {"<<"}
       </button>
       <input
-        className="border-b border-gray-900 border-dashed w-6 mx-4"
+        className="w-6 mx-4 border-b border-gray-900 border-dashed"
         value={props.pageChoose}
         onKeyDown={(e) => choosingPage(e)}
         onChange={(e) => setPageChoose(e.target.value)}
       />
       <button
-        className="text-sm bg-blue-200 hover:bg-blue-300 text-gray-800 font-semibold py-2 px-4 rounded-r"
+        className="px-4 py-2 text-sm font-semibold text-gray-800 bg-blue-200 rounded-r hover:bg-blue-300"
         onClick={() => props.nextPage()}
       >
         {">>"}
@@ -31,4 +31,4 @@ const PaginatedTablePageSelect = (props) => {
   );
 };
 
-export { PaginatedTablePageSelect };
+export { PageSelect };
