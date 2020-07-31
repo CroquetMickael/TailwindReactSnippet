@@ -6,7 +6,6 @@ import { useSortableData } from "../../Common/Sort/Hooks/Sort";
 import { TableBase } from "./TableBase.component";
 import { TableTd } from "./TableTd.component";
 import { TableTop } from "./TableTop.component";
-import PropTypes from "prop-types";
 
 export interface TableProps {
   data: Array<any>;
