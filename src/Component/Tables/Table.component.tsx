@@ -9,11 +9,23 @@ import { TableTop } from "./TableTop.component";
 
 export interface TableProps {
   data: Array<any>;
-  head: Array<{ show: string; value: string; sort: boolean }>;
+  /**
+   * show : This value is just the <th> name displayed
+   *
+   * value : This value need to be as exact the key of your data, like data: {name: "salut"} then you should have here "name", in order to show correctly the data
+   */
+  head: Array<{
+    show: string;
+    value: string;
+    sort: boolean;
+  }>;
   paginated: boolean;
   itemsPerPage: number;
   options: {
-    NumberItemsOptions: { permitChange: boolean; options: Array<number> };
+    NumberItemsOptions: {
+      permitChange: boolean;
+      options: Array<number>;
+    };
   };
 }
 const Table = (props: TableProps) => {
