@@ -16,7 +16,7 @@ const PageSelect = (props) => {
         {"<<"}
       </button>
       <input
-        className="w-6 mx-4 border-b border-gray-900 border-dashed"
+        className="w-6 mx-4 border-b border-gray-900 border-dashed text-center"
         value={props.pageChoose}
         onKeyDown={(e) => choosingPage(e)}
         onChange={(e) => setPageChoose(e.target.value)}
