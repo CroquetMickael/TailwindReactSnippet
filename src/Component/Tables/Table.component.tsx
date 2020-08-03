@@ -10,9 +10,9 @@ import { TableTop } from "./TableTop.component";
 export interface TableProps {
   data: Array<any>;
   /**
-   * show : This value is just the <th> name displayed
+   *  **show** : This value is just the <th> name displayed
    *
-   * value : This value need to be as exact the key of your data, like data: {name: "salut"} then you should have here "name", in order to show correctly the data
+   * **value** : This value need to be as exact the key of your data, like data: {name: "salut"} then you should have here "name", in order to show correctly the data
    */
   head: Array<{
     show: string;
@@ -41,7 +41,7 @@ const Table = (props: TableProps) => {
   } = usePagination(items, itemsPerPage);
   return (
     <>
-      <div className="relative w-32 px-2 py-2">
+      <div className="py-4">
         <TableTop {...props.options} setItemsPerPage={setItemsPerPage} />
       </div>
       <TableBase
@@ -70,6 +70,7 @@ const Table = (props: TableProps) => {
           <PageSelect
             nextPage={nextPage}
             previousPage={previousPage}
+            currentPage={currentPage}
             jump={jump}
           />
         </div>
