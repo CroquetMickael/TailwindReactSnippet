@@ -12,9 +12,9 @@ const ItemsNumberSelect = (props) => {
           <option key={index}>{option}</option>
         ))}
       </select>
-      <div class="pointer-events-none absolute inset-y-0 pr-2 right-0 flex items-center text-gray-700">
+      <div className="absolute inset-y-0 right-0 flex items-center pr-2 text-gray-700 pointer-events-none">
         <svg
-          class="fill-current h-4 w-4"
+          className="w-4 h-4 fill-current"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 20 20"
         >

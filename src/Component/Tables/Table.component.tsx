@@ -27,6 +27,26 @@ export interface TableProps {
       options: Array<number>;
     };
   };
+    /**
+   *  For th values :
+   *  
+   * **standard** : The class that just be used like normal className
+   * 
+   * **hover** : Is the class used when the sort is activated so you can trigger here you need to combine standard class and this one to get a proper things to work
+   *
+   */
+  className?: {
+    th?: {
+      standard: string;
+      hover: string;
+    }
+    tr?: string;
+    td?: string;
+    pageSelect?: {
+      button: string;
+      input: string;
+    }
+  }
 }
 const Table = (props: TableProps) => {
   const [itemsPerPage, setItemsPerPage] = useState(props.itemsPerPage);
@@ -48,12 +68,13 @@ const Table = (props: TableProps) => {
         head={props.head}
         requestSort={requestSort}
         sortConfig={sortConfig}
+        className={props.className?.th}
       >
         {currentData(props.paginated).map((data: any, index: number) => {
           return (
-            <tr key={index}>
+            <tr className={props.className?.tr} key={index}>
               {props.head.map((head, index) => (
-                <TableTd key={index}>{data[head.value]}</TableTd>
+                <td className={props.className?.td} key={index}>{data[head.value]}</td>
               ))}
             </tr>
           );
@@ -68,10 +89,11 @@ const Table = (props: TableProps) => {
             itemsPerPage={itemsPerPage}
           />
           <PageSelect
-            nextPage={nextPage}
+            nextPage={nextPage} 
             previousPage={previousPage}
             currentPage={currentPage}
             jump={jump}
+            className={props.className?.pageSelect}
           />
         </div>
       ) : null}
