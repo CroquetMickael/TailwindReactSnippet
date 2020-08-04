@@ -4,7 +4,6 @@ import { PageSelect } from "../../Common/Paginated/PageSelect.component";
 import { usePagination } from "../../Common/Paginated/Hooks/Pagination";
 import { useSortableData } from "../../Common/Sort/Hooks/Sort";
 import { TableBase } from "./TableBase.component";
-import { TableTd } from "./TableTd.component";
 import { TableTop } from "./TableTop.component";
 
 export interface TableProps {
@@ -28,7 +27,7 @@ export interface TableProps {
     };
   };
     /**
-   *  For th values :
+   *  For **th** values :
    *  
    * **standard** : The class that just be used like normal className
    * 
