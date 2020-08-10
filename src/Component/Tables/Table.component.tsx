@@ -30,6 +30,7 @@ export interface TableProps {
     search: {
       activate: boolean;
       placeholder: string;
+      searchableValue: string[];
     };
     numberItemsOptions: {
       permitChange: boolean;
@@ -61,7 +62,11 @@ const Table = (props: TableProps) => {
   const [itemsPerPage, setItemsPerPage] = useState(props.itemsPerPage);
   const [searchVal, setSearchValue] = useState(null);
   const { items, requestSort, sortConfig } = useSortableData(props.data);
-  const { filteredData } = useTableSearch(searchVal, items);
+  const { filteredData } = useTableSearch(
+    searchVal,
+    items,
+    props.options.search.searchableValue
+  );
   const {
     currentData,
     nextPage,

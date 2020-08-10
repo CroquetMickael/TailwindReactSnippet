@@ -1,7 +1,6 @@
 import React from "react";
 
-const TableHead = 
-(props) => {
+const TableHead = (props) => {
   const getClassNamesFor = (name) => {
     if (!props.sortConfig) {
       return;
@@ -18,19 +17,15 @@ const TableHead =
             <th
               key={index}
               onClick={() => props.requestSort(head.value)}
-              className={ getClassNamesFor(head.value) +
+              className={
+                getClassNamesFor(head.value) +
                 ` ${props.className?.standard} ${props.className?.hover}`
-               
-                
               }
             >
               {head.show}
             </th>
           ) : (
-            <th
-              key={index}
-              className={props.className?.standard}
-            >
+            <th key={index} className={props.className?.standard}>
               {head.show}
             </th>
           )

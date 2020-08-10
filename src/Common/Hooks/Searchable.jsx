@@ -1,4 +1,4 @@
-export const useTableSearch = (searchVal, datas) => {
+export const useTableSearch = (searchVal, datas, searchableValues) => {
   let result = [];
 
   function getEachItem() {
@@ -18,7 +18,7 @@ export const useTableSearch = (searchVal, datas) => {
       if (typeof item[key] === "object") {
         searchItem(item[key]);
       }
-      if (typeof item[key] === "string") {
+      if (typeof item[key] === "string" && searchableValues.includes(key)) {
         let searchAsRegEx = new RegExp(searchVal, "gi");
         if (item[key].toString().match(searchAsRegEx)) {
           result.push(item);
