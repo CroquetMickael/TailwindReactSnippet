@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { ElementCounter } from "../../Common/Paginated/ElementCounter.component";
 import { PageSelect } from "../../Common/Paginated/PageSelect.component";
-import { usePagination } from "../../Common/Paginated/Hooks/Pagination";
-import { useSortableData } from "../../Common/Sort/Hooks/Sort";
+import { usePagination } from "../../Common/Hooks/Pagination";
+import { useSortableData } from "../../Common/Hooks/Sort";
 import { TableBase } from "./TableBase.component";
 import { TableTop } from "./TableTop.component";
+import { useTableSearch } from "../../Common/Hooks/Searchable";
 
 export interface TableProps {
   data: Array<any>;
@@ -12,25 +13,34 @@ export interface TableProps {
    *  **show** : This value is just the <th> name displayed
    *
    * **value** : This value need to be as exact the key of your data, like data: {name: "salut"} then you should have here "name", in order to show correctly the data
+   *
+   * **sort** : This permit to activate the sorting or not
    */
   head: Array<{
     show: string;
     value: string;
     sort: boolean;
   }>;
+  /**
+   * Activate or not the pagination
+   */
   paginated: boolean;
   itemsPerPage: number;
   options: {
-    NumberItemsOptions: {
+    search: {
+      activate: boolean;
+      placeholder: string;
+    };
+    numberItemsOptions: {
       permitChange: boolean;
       options: Array<number>;
     };
   };
-    /**
+  /**
    *  For **th** values :
-   *  
+   *
    * **standard** : The class that just be used like normal className
-   * 
+   *
    * **hover** : Is the class used when the sort is activated so you can trigger here you need to combine standard class and this one to get a proper things to work
    *
    */
@@ -38,18 +48,20 @@ export interface TableProps {
     th?: {
       standard: string;
       hover: string;
-    }
+    };
     tr?: string;
     td?: string;
     pageSelect?: {
       button: string;
       input: string;
-    }
-  }
+    };
+  };
 }
 const Table = (props: TableProps) => {
   const [itemsPerPage, setItemsPerPage] = useState(props.itemsPerPage);
+  const [searchVal, setSearchValue] = useState(null);
   const { items, requestSort, sortConfig } = useSortableData(props.data);
+  const { filteredData } = useTableSearch(searchVal, items);
   const {
     currentData,
     nextPage,
@@ -57,11 +69,17 @@ const Table = (props: TableProps) => {
     maxPage,
     currentPage,
     jump,
-  } = usePagination(items, itemsPerPage);
+  } = usePagination(filteredData, itemsPerPage);
+
   return (
     <>
-      <div className="py-4">
-        <TableTop {...props.options} setItemsPerPage={setItemsPerPage} />
+      <div className="flex py-4">
+        <TableTop
+          {...props.options}
+          paginated={props.paginated}
+          setItemsPerPage={setItemsPerPage}
+          setSearchValue={setSearchValue}
+        />
       </div>
       <TableBase
         head={props.head}
@@ -73,7 +91,9 @@ const Table = (props: TableProps) => {
           return (
             <tr className={props.className?.tr} key={index}>
               {props.head.map((head, index) => (
-                <td className={props.className?.td} key={index}>{data[head.value]}</td>
+                <td className={props.className?.td} key={index}>
+                  {data[head.value]}
+                </td>
               ))}
             </tr>
           );
@@ -88,7 +108,7 @@ const Table = (props: TableProps) => {
             itemsPerPage={itemsPerPage}
           />
           <PageSelect
-            nextPage={nextPage} 
+            nextPage={nextPage}
             previousPage={previousPage}
             currentPage={currentPage}
             jump={jump}
