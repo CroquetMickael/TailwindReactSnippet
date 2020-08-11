@@ -3,11 +3,12 @@ import { ItemsNumberSelect } from "./TableTop/ItemsNumberSelect.component";
 import { SearchableInput } from "./TableTop/SearchableInput.component";
 const TableTop = (props) => (
   <>
-    {props.numberItemsOptions.permitChange !== false &&
-    props.paginated !== false ? (
+    {props.paginated !== false &&
+    props.numberItemsOptions !== undefined &&
+    props.numberItemsOptions?.length ? (
       <ItemsNumberSelect {...props} />
     ) : null}
-    {props.search.activate !== false ? (
+    {props.search !== undefined && props.search.searchableValue?.length ? (
       <SearchableInput
         setSearchValue={props.setSearchValue}
         placeholder={props.search.placeholder}

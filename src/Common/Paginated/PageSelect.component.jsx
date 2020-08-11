@@ -9,24 +9,17 @@ const PageSelect = (props) => {
   };
   return (
     <div className="inline-flex mt-2 xs:mt-0">
-      <button
-        className={props.className?.button}
-        onClick={() => props.previousPage()}
-      >
-        {"<<"}
-      </button>
-      <input
-        className={props.className?.input}
-        value={props.pageChoose}
-        onKeyDown={(e) => choosingPage(e)}
-        onChange={(e) => setPageChoose(e.target.value)}
-      />
-      <button
-        className={props.className?.button}
-        onClick={() => props.nextPage()}
-      >
-        {">>"}
-      </button>
+      {React.cloneElement(props.left, {
+        onClick: () => props.previousPage(),
+      })}
+      {React.cloneElement(props.jumper, {
+        onChange: (e) => setPageChoose(e.target.value),
+        onKeyDown: (e) => choosingPage(e),
+        value: pageChoose,
+      })}
+      {React.cloneElement(props.right, {
+        onClick: () => props.nextPage(),
+      })}
     </div>
   );
 };

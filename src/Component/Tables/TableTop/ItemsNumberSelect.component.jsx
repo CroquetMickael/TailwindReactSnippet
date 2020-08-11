@@ -6,7 +6,7 @@ const ItemsNumberSelect = (props) => (
       className="block w-16 h-full px-4 py-2 pr-4 leading-tight text-gray-700 bg-white border border-gray-400 rounded appearance-none focus:outline-none focus:bg-white focus:border-gray-500"
       onChange={(e) => props.setItemsPerPage(e.target.value)}
     >
-      {props.numberItemsOptions.options.map((option, index) => (
+      {props.numberItemsOptions.map((option, index) => (
         <option key={index}>{option}</option>
       ))}
     </select>

@@ -2,7 +2,7 @@ export const useTableSearch = (searchVal, datas, searchableValues) => {
   let result = [];
 
   function getEachItem() {
-    if (searchVal) {
+    if (searchVal && searchableValues.length) {
       datas.forEach((item) => {
         searchItem(item);
       });

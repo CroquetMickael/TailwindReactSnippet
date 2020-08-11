@@ -26,35 +26,18 @@ export interface TableProps {
    */
   paginated: boolean;
   itemsPerPage: number;
-  options: {
+  options?: {
     search: {
-      activate: boolean;
       placeholder: string;
       searchableValue: string[];
     };
-    numberItemsOptions: {
-      permitChange: boolean;
-      options: Array<number>;
-    };
+    numberItemsOptions: Array<number>;
   };
-  /**
-   *  For **th** values :
-   *
-   * **standard** : The class that just be used like normal className
-   *
-   * **hover** : Is the class used when the sort is activated so you can trigger here you need to combine standard class and this one to get a proper things to work
-   *
-   */
-  className?: {
-    th?: {
-      standard: string;
-      hover: string;
-    };
-    tr?: string;
-    td?: string;
-    pageSelect?: {
-      button: string;
-      input: string;
+  component?: {
+    pageSelector: {
+      left: JSX.Element;
+      jumper: JSX.Element;
+      right: JSX.Element;
     };
   };
 }
@@ -65,7 +48,7 @@ const Table = (props: TableProps) => {
   const { filteredData } = useTableSearch(
     searchVal,
     items,
-    props.options.search.searchableValue
+    props.options?.search?.searchableValue
   );
   const {
     currentData,
@@ -78,34 +61,31 @@ const Table = (props: TableProps) => {
 
   return (
     <>
-      <div className="flex py-4">
+      {props.options ? (
         <TableTop
           {...props.options}
           paginated={props.paginated}
           setItemsPerPage={setItemsPerPage}
           setSearchValue={setSearchValue}
         />
-      </div>
+      ) : null}
       <TableBase
         head={props.head}
         requestSort={requestSort}
         sortConfig={sortConfig}
-        className={props.className?.th}
       >
         {currentData(props.paginated).map((data: any, index: number) => {
           return (
-            <tr className={props.className?.tr} key={index}>
+            <tr key={index}>
               {props.head.map((head, index) => (
-                <td className={props.className?.td} key={index}>
-                  {data[head.value]}
-                </td>
+                <td key={index}>{data[head.value]}</td>
               ))}
             </tr>
           );
         })}
       </TableBase>
       {props.paginated !== false ? (
-        <div className="flex flex-col items-center px-5 py-5 bg-white border-t xs:flex-row xs:justify-between">
+        <>
           <ElementCounter
             itemsLength={props.data.length}
             currentPage={currentPage}
@@ -113,13 +93,13 @@ const Table = (props: TableProps) => {
             itemsPerPage={itemsPerPage}
           />
           <PageSelect
+            {...props.component?.pageSelector}
             nextPage={nextPage}
             previousPage={previousPage}
             currentPage={currentPage}
             jump={jump}
-            className={props.className?.pageSelect}
           />
-        </div>
+        </>
       ) : null}
     </>
   );
