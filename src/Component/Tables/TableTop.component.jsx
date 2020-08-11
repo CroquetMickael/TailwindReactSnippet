@@ -8,12 +8,11 @@ const TableTop = (props) => (
     props.numberItemsOptions?.length ? (
       <ItemsNumberSelect {...props} />
     ) : null}
-    {props.search !== undefined && props.search.searchableValue?.length ? (
-      <SearchableInput
-        setSearchValue={props.setSearchValue}
-        placeholder={props.search.placeholder}
-      />
-    ) : null}
+    {props.search.searchableValue?.length && props.searchInput !== undefined
+      ? React.cloneElement(props.searchInput, {
+          onChange: (e) => props.setSearchValue(e.target.value),
+        })
+      : null}
   </>
 );
 

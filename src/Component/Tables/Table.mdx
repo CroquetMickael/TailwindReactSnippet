@@ -12,8 +12,9 @@ route: /Table
 import { Playground, Props } from "docz";
 import tableData from "../../Mock/Table.json";
 import { Table } from "./Table.component";
-import { PageButton } from "../../TestingComponentComposition/PageButton";
-import { InputJumper } from "../../TestingComponentComposition/InputJumper";
+import { Button } from "../../TestingComponentComposition/Button";
+import { InputJumper } from "../../TestingComponentComposition/Input/InputJumper";
+import { Input } from "../../TestingComponentComposition/Input/Input";
 
 ## Exemple
 
@@ -34,10 +35,13 @@ Current css framework used is Tailwindcss but in a real usecase, you can use wha
       numberItemsOptions: [4, 8, 12],
     }}
     component={{
+      top: {
+        searchInput: <Input placeHolder="Searching" />,
+      },
       pageSelector: {
-        left: <PageButton>{"<<"}</PageButton>,
+        left: <Button>{"<<"}</Button>,
         jumper: <InputJumper />,
-        right: <PageButton>{">>"}</PageButton>,
+        right: <Button>{">>"}</Button>,
       },
     }}
     head={[

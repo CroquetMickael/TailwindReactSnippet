@@ -27,13 +27,13 @@ export interface TableProps {
   paginated: boolean;
   itemsPerPage: number;
   options?: {
-    search: {
-      placeholder: string;
-      searchableValue: string[];
-    };
+    searchableValue: string[];
     numberItemsOptions: Array<number>;
   };
   component?: {
+    top?: {
+      searchInput: JSX.Element;
+    };
     pageSelector: {
       left: JSX.Element;
       jumper: JSX.Element;
@@ -48,7 +48,7 @@ const Table = (props: TableProps) => {
   const { filteredData } = useTableSearch(
     searchVal,
     items,
-    props.options?.search?.searchableValue
+    props.options?.searchableValue
   );
   const {
     currentData,
@@ -63,6 +63,7 @@ const Table = (props: TableProps) => {
     <>
       {props.options ? (
         <TableTop
+          {...props.component?.top}
           {...props.options}
           paginated={props.paginated}
           setItemsPerPage={setItemsPerPage}
