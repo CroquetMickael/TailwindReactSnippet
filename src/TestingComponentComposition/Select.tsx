@@ -1,12 +1,16 @@
-import React from "react";
+import React, { ChangeEvent } from "react";
 
-const ItemsNumberSelect = (props) => (
+interface SelectProps {
+  onChange?: (e: ChangeEvent<HTMLSelectElement>) => void;
+  options?: number[];
+}
+const Select = (props: SelectProps) => (
   <div className="relative w-16">
     <select
       className="block w-16 h-full px-4 py-2 pr-4 leading-tight text-gray-700 bg-white border border-gray-400 rounded appearance-none focus:outline-none focus:bg-white focus:border-gray-500"
-      onChange={(e) => props.setItemsPerPage(e.target.value)}
+      onChange={props.onChange}
     >
-      {props.numberItemsOptions.map((option, index) => (
+      {props.options?.map((option, index) => (
         <option key={index}>{option}</option>
       ))}
     </select>
@@ -22,4 +26,4 @@ const ItemsNumberSelect = (props) => (
   </div>
 );
 
-export { ItemsNumberSelect };
+export { Select };

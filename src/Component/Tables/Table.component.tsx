@@ -31,9 +31,7 @@ export interface TableProps {
     numberItemsOptions: Array<number>;
   };
   component?: {
-    top?: {
-      searchInput: JSX.Element;
-    };
+    top?: JSX.Element;
     pageSelector: {
       left: JSX.Element;
       jumper: JSX.Element;
@@ -48,7 +46,7 @@ const Table = (props: TableProps) => {
   const { filteredData } = useTableSearch(
     searchVal,
     items,
-    props.options?.searchableValue
+    props.component?.top?.props.searchInput.props.searchableValue
   );
   const {
     currentData,
@@ -61,10 +59,9 @@ const Table = (props: TableProps) => {
 
   return (
     <>
-      {props.options ? (
+      {props.component?.top ? (
         <TableTop
-          {...props.component?.top}
-          {...props.options}
+          top={props.component?.top}
           paginated={props.paginated}
           setItemsPerPage={setItemsPerPage}
           setSearchValue={setSearchValue}

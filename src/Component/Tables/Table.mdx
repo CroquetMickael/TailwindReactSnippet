@@ -5,18 +5,32 @@ route: /Table
 
 # Table component
 
-## Props
-
-<Props of={Table} />
-
 import { Playground, Props } from "docz";
 import tableData from "../../Mock/Table.json";
 import { Table } from "./Table.component";
 import { Button } from "../../TestingComponentComposition/Button";
 import { InputJumper } from "../../TestingComponentComposition/Input/InputJumper";
 import { Input } from "../../TestingComponentComposition/Input/Input";
+import { TopBar } from "../../TestingComponentComposition/TopBar";
+import { Select } from "../../TestingComponentComposition/Select";
 
-## Exemple
+## Props of tables
+
+<Props of={Table} />
+
+# Props of component in tables
+
+Don't inject THOSE props, just permit to use them inside your components, the table component will inject all the logic for the pagination / sort / search
+
+## Props of button
+
+<Props of={Button} />
+
+## Props of Input
+
+<Props of={Input} />
+
+# Exemple
 
 Current data is load by a json file so don't change tableData.
 
@@ -27,17 +41,18 @@ Current css framework used is Tailwindcss but in a real usecase, you can use wha
     data={tableData}
     itemsPerPage={4}
     paginated={true}
-    options={{
-      search: {
-        placeholder: "Searching",
-        searchableValue: ["nom", "prenom", "actif"],
-      },
-      numberItemsOptions: [4, 8, 12],
-    }}
     component={{
-      top: {
-        searchInput: <Input placeHolder="Searching" />,
-      },
+      top: (
+        <TopBar
+          searchInput={
+            <Input
+              placeHolder="Searching"
+              searchableValue={["nom", "prenom", "actif"]}
+            />
+          }
+          itemsSelect={<Select options={[4, 8, 12]} />}
+        />
+      ),
       pageSelector: {
         left: <Button>{"<<"}</Button>,
         jumper: <InputJumper />,
