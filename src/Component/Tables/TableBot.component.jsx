@@ -1,27 +1,29 @@
 import React, { useState } from "react";
 
-const PageSelect = (props) => {
+const TableBot = (props) => {
   const [pageChoose, setPageChoose] = useState();
   const choosingPage = (event) => {
     if (event.key === "Enter") {
       props.jump(pageChoose);
     }
   };
-  return (
-    <div className="inline-flex mt-2 xs:mt-0">
-      {React.cloneElement(props.left, {
+  return React.cloneElement(
+    props.bot,
+    {},
+    <>
+      {React.cloneElement(props.bot.props.left, {
         onClick: () => props.previousPage(),
       })}
-      {React.cloneElement(props.jumper, {
+      {React.cloneElement(props.bot.props.jumper, {
         onChange: (e) => setPageChoose(e.target.value),
         onKeyDown: (e) => choosingPage(e),
         value: pageChoose,
       })}
-      {React.cloneElement(props.right, {
+      {React.cloneElement(props.bot.props.right, {
         onClick: () => props.nextPage(),
       })}
-    </div>
+    </>
   );
 };
 
-export { PageSelect };
+export { TableBot };

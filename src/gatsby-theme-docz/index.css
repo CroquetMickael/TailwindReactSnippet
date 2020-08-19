@@ -2,11 +2,12 @@
 @import url("https://fonts.googleapis.com/css?family=Inconsolata&display=swap");
 @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap");
 
+
 th.ascending::after {
   width: 0;
   height: 0;
   content: " ";
-  border-bottom: 8px solid #333;
+  border-bottom: 8px solid white;
   border-left: 8px solid transparent;
   border-right: 8px solid transparent;
   display: inline-block;
@@ -17,7 +18,7 @@ th.descending::after {
   width: 0;
   height: 0;
   content: " ";
-  border-top: 8px solid #333;
+  border-top: 8px solid white;
   border-left: 8px solid transparent;
   border-right: 8px solid transparent;
   display: inline-block;

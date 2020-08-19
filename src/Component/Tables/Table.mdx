@@ -12,6 +12,7 @@ import { Button } from "../../TestingComponentComposition/Button";
 import { InputJumper } from "../../TestingComponentComposition/Input/InputJumper";
 import { Input } from "../../TestingComponentComposition/Input/Input";
 import { TopBar } from "../../TestingComponentComposition/TopBar";
+import { BottomBar } from "../../TestingComponentComposition/BottomBar";
 import { Select } from "../../TestingComponentComposition/Select";
 
 ## Props of tables
@@ -29,6 +30,10 @@ Don't inject THOSE props, just permit to use them inside your components, the ta
 ## Props of Input
 
 <Props of={Input} />
+
+## Props of Select
+
+<Props of={Select} />
 
 # Exemple
 
@@ -53,11 +58,13 @@ Current css framework used is Tailwindcss but in a real usecase, you can use wha
           itemsSelect={<Select options={[4, 8, 12]} />}
         />
       ),
-      pageSelector: {
-        left: <Button>{"<<"}</Button>,
-        jumper: <InputJumper />,
-        right: <Button>{">>"}</Button>,
-      },
+      bot: (
+        <BottomBar
+          jumper={<InputJumper />}
+          left={<Button>{"<<"}</Button>}
+          right={<Button>{">>"}</Button>}
+        />
+      ),
     }}
     head={[
       { show: "Nom", value: "nom", sort: true },

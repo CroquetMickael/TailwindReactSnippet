@@ -1,8 +1,9 @@
 import React from "react";
 
 const TableTop = (props) => {
-  console.log(props.top.props.searchInput.props.searchableValue?.length);
-  return (
+  return React.cloneElement(
+    props.top,
+    {},
     <>
       {props.paginated !== false &&
       props.top.props.itemsSelect !== undefined &&

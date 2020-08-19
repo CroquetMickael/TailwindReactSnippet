@@ -2,7 +2,7 @@ import React, { ChangeEvent } from "react";
 
 interface SelectProps {
   onChange?: (e: ChangeEvent<HTMLSelectElement>) => void;
-  options?: number[];
+  options?: any[];
 }
 const Select = (props: SelectProps) => (
   <div className="relative w-16">

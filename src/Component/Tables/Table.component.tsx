@@ -1,11 +1,10 @@
 import React, { useState } from "react";
-import { ElementCounter } from "../../Common/Paginated/ElementCounter.component";
-import { PageSelect } from "../../Common/Paginated/PageSelect.component";
 import { usePagination } from "../../Common/Hooks/Pagination";
 import { useSortableData } from "../../Common/Hooks/Sort";
 import { TableBase } from "./TableBase.component";
 import { TableTop } from "./TableTop.component";
 import { useTableSearch } from "../../Common/Hooks/Searchable";
+import { TableBot } from "./TableBot.component";
 
 export interface TableProps {
   data: Array<any>;
@@ -26,17 +25,22 @@ export interface TableProps {
    */
   paginated: boolean;
   itemsPerPage: number;
-  options?: {
-    searchableValue: string[];
-    numberItemsOptions: Array<number>;
-  };
+  /**
+   * **top** : Expect a Component that will wrap his props, props should be :     
+   * 
+   * **searchInput** : Component with props placeHolder & searchableValue (list of string)
+   * 
+   *  **itemsSelect** : Component select that accept options (list of anything)
+   * 
+   * **bot** : Expect a Component that will wrap his props, props should be :  
+   * 
+   * **left/right** : A button component that will have a children implement
+   * 
+   * **jumper** : Input component
+   */
   component?: {
     top?: JSX.Element;
-    pageSelector: {
-      left: JSX.Element;
-      jumper: JSX.Element;
-      right: JSX.Element;
-    };
+    bot?: JSX.Element;
   };
 }
 const Table = (props: TableProps) => {
@@ -83,21 +87,12 @@ const Table = (props: TableProps) => {
         })}
       </TableBase>
       {props.paginated !== false ? (
-        <>
-          <ElementCounter
-            itemsLength={props.data.length}
-            currentPage={currentPage}
-            maxPage={maxPage}
-            itemsPerPage={itemsPerPage}
-          />
-          <PageSelect
-            {...props.component?.pageSelector}
-            nextPage={nextPage}
-            previousPage={previousPage}
-            currentPage={currentPage}
-            jump={jump}
-          />
-        </>
+        <TableBot
+          bot={props.component?.bot}
+          jump={jump}
+          nextPage={nextPage}
+          previousPage={previousPage}
+        />
       ) : null}
     </>
   );
