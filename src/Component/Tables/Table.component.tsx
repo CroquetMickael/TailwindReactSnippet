@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { usePagination } from "../../Common/Hooks/Pagination";
 import { useSortableData } from "../../Common/Hooks/Sort";
-import { TableBase } from "./TableBase.component";
 import { TableTop } from "./TableTop.component";
 import { useTableSearch } from "../../Common/Hooks/Searchable";
 import { TableBot } from "./TableBot.component";
@@ -28,6 +27,10 @@ export interface TableProps {
     table: string;
   };
   /**
+   * Defaut number of item for a page
+   */
+  itemsPerPage: number;
+  /**
    * Activate or not the pagination
    */
   paginated: boolean;
@@ -50,15 +53,13 @@ export interface TableProps {
   };
 }
 const Table = (props: TableProps) => {
-  const [itemsPerPage, setItemsPerPage] = useState(
-    props.component?.top?.props.itemsSelect.props.options[0]
-  );
+  const [itemsPerPage, setItemsPerPage] = useState(props.itemsPerPage);
   const [searchVal, setSearchValue] = useState(null);
   const { items, requestSort, sortConfig } = useSortableData(props.data);
   const { filteredData } = useTableSearch(
     searchVal,
     items,
-    props.component?.top?.props.searchInput.props.searchableValue
+    props.component?.top?.props.searchInput.props.searchableValue || []
   );
   const {
     currentData,
