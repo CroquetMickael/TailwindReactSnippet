@@ -6,7 +6,7 @@ interface ButtonProps {
 }
 const Button = (props: ButtonProps) => (
   <button
-    className="px-4 py-2 text-sm font-semibold text-gray-800 bg-gray-200 rounded-r hover:bg-gray-300"
+    className="px-4 py-2 text-sm font-semibold text-white bg-blue-600 rounded-r hover:bg-blue-900"
     onClick={props.onClick}
   >
     {props.children}

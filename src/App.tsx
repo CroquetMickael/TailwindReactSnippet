@@ -3,7 +3,7 @@ import "./App.css";
 import tableData from "./Mock/Table.json";
 import { Table } from "./Component/Tables/Table.component";
 import { Button } from "./TestingComponentComposition/Button";
-import { InputJumper } from "./TestingComponentComposition/Input/InputJumper";
+import { InputTable } from "./TestingComponentComposition/Input/InputTable";
 import { Input } from "./TestingComponentComposition/Input/Input";
 import { TopBar } from "./TestingComponentComposition/TopBar";
 import { Select } from "./TestingComponentComposition/Select";
@@ -13,7 +13,6 @@ function App() {
     <div className="h-screen bg-red-400">
       <Table
         data={tableData}
-        itemsPerPage={4}
         paginated={true}
         component={{
           top: (
@@ -29,7 +28,7 @@ function App() {
           ),
           bot: (
             <BottomBar
-              jumper={<InputJumper />}
+              jumper={<InputTable />}
               left={<Button>{"<<"}</Button>}
               right={<Button>{">>"}</Button>}
             />

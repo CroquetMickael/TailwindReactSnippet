@@ -2,7 +2,7 @@ import React from "react";
 import { TableHead } from "./TableHead.component";
 
 const TableBase = (props) => (
-  <table className="min-w-full leading-normal">
+  <table>
     <TableHead
       head={props.head}
       requestSort={props.requestSort}

@@ -5,6 +5,7 @@ import { TableBase } from "./TableBase.component";
 import { TableTop } from "./TableTop.component";
 import { useTableSearch } from "../../Common/Hooks/Searchable";
 import { TableBot } from "./TableBot.component";
+import { TableHead } from "./TableHead.component";
 
 export interface TableProps {
   data: Array<any>;
@@ -20,22 +21,27 @@ export interface TableProps {
     value: string;
     sort: boolean;
   }>;
+  class: {
+    tr: string;
+    td: string;
+    th: string;
+    table: string;
+  };
   /**
    * Activate or not the pagination
    */
   paginated: boolean;
-  itemsPerPage: number;
   /**
-   * **top** : Expect a Component that will wrap his props, props should be :     
-   * 
+   * **top** : Expect a Component that will wrap his props, props should be :
+   *
    * **searchInput** : Component with props placeHolder & searchableValue (list of string)
-   * 
+   *
    *  **itemsSelect** : Component select that accept options (list of anything)
-   * 
-   * **bot** : Expect a Component that will wrap his props, props should be :  
-   * 
+   *
+   * **bot** : Expect a Component that will wrap his props, props should be :
+   *
    * **left/right** : A button component that will have a children implement
-   * 
+   *
    * **jumper** : Input component
    */
   component?: {
@@ -44,7 +50,9 @@ export interface TableProps {
   };
 }
 const Table = (props: TableProps) => {
-  const [itemsPerPage, setItemsPerPage] = useState(props.itemsPerPage);
+  const [itemsPerPage, setItemsPerPage] = useState(
+    props.component?.top?.props.itemsSelect.props.options[0]
+  );
   const [searchVal, setSearchValue] = useState(null);
   const { items, requestSort, sortConfig } = useSortableData(props.data);
   const { filteredData } = useTableSearch(
@@ -71,21 +79,27 @@ const Table = (props: TableProps) => {
           setSearchValue={setSearchValue}
         />
       ) : null}
-      <TableBase
-        head={props.head}
-        requestSort={requestSort}
-        sortConfig={sortConfig}
-      >
-        {currentData(props.paginated).map((data: any, index: number) => {
-          return (
-            <tr key={index}>
-              {props.head.map((head, index) => (
-                <td key={index}>{data[head.value]}</td>
-              ))}
-            </tr>
-          );
-        })}
-      </TableBase>
+      <table className={props.class.table}>
+        <TableHead
+          head={props.head}
+          requestSort={requestSort}
+          sortConfig={sortConfig}
+          className={{ th: props.class.th }}
+        />
+        <tbody>
+          {currentData(props.paginated).map((data: any, index: number) => {
+            return (
+              <tr key={index} className={props.class.tr}>
+                {props.head.map((head, index) => (
+                  <td className={props.class.td} key={index}>
+                    {data[head.value]}
+                  </td>
+                ))}
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
       {props.paginated !== false ? (
         <TableBot
           bot={props.component?.bot}

@@ -18,14 +18,13 @@ const TableHead = (props) => {
               key={index}
               onClick={() => props.requestSort(head.value)}
               className={
-                getClassNamesFor(head.value) +
-                ` ${props.className?.standard} ${props.className?.hover}`
+                getClassNamesFor(head.value) + ` ${props.className?.th}`
               }
             >
               {head.show}
             </th>
           ) : (
-            <th key={index} className={props.className?.standard}>
+            <th key={index} className={props.className?.th}>
               {head.show}
             </th>
           )
