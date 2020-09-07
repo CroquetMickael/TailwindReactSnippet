@@ -9,7 +9,7 @@ import { Playground, Props } from "docz";
 import { AutocompleteSelect } from "./AutocompleteSelect.jsx";
 import { Input } from "../../TestingComponentComposition/Input/Input";
 import { AutoCompleteList } from "../../TestingComponentComposition/Autocomplete/AutocompleteList";
-import { AutoCompleteLabelList } from "../../TestingComponentComposition/Autocomplete/AutoCompleteLabelList";
+import { AutoCompleteLabelList } from "../../TestingComponentComposition/Autocomplete/AutocompleteLabelList";
 import tableData from "../../Mock/Table.json";
 
 # Exemple
@@ -47,7 +47,7 @@ Current css framework used is Tailwindcss but in a real usecase, you can use wha
     return (
       <AutocompleteSelect
         items={data}
-        class="flex cursor-pointer flex-wrap py-2 w-full"
+        class="flex flex-wrap w-full py-2 cursor-pointer"
         selectedItems={selectedData}
         Label={
           <AutoCompleteLabelList
