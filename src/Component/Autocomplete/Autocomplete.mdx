@@ -35,14 +35,14 @@ Current css framework used is Tailwindcss but in a real usecase, you can use wha
       const array = selectedData;
       item.selected = true;
       array.push(item);
-      setSelectedData(array);
+      setSelectedData([...array]);
     };
     let removeItem = (item, index) => {
       const array = selectedData;
       console.log(index);
       item.selected = false;
       array.splice(index, 1);
-      setSelectedData(array);
+      setSelectedData([...array]);
     };
     return (
       <AutocompleteSelect

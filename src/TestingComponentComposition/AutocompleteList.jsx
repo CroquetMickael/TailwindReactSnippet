@@ -1,10 +1,6 @@
 import React from "react";
 
 const AutoCompleteList = (props) => {
-  const onClick = (item) => {
-    props.onClick(item);
-    props.setSearchable("");
-  };
   return (
     <div className="bg-white border border-gray-700">
       {props.data.map((item, index) =>
@@ -18,7 +14,7 @@ const AutoCompleteList = (props) => {
         ) : (
           <p
             className="bg-white hover:bg-gray-400 border-b border-gray-400 p-2 cursor-pointer"
-            onClick={() => onClick(item)}
+            onClick={() => props.onClick(item)}
             key={index}
           >
             {item.searchable}
