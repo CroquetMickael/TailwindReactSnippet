@@ -10,14 +10,16 @@ const AutocompleteSelect = (props) => {
   );
   return (
     <>
-      <div className={props.class} onClick={() => filteredData(false)}>
+      <div className={props.class}>
         {React.cloneElement(props.Label, {
           data: props.selectedItems,
           setSearchable: setSearchValue,
         })}
         {props.searchInput !== undefined
           ? React.cloneElement(props.searchInput, {
-              onChange: (e) => setSearchValue(e.target.value),
+              onChange: (e) => {
+                setSearchValue(e.target.value);
+              },
               value: searchVal,
             })
           : null}
