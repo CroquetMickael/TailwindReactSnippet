@@ -1,0 +1,66 @@
+---
+name: Autocomplete
+route: /Autocomplete
+---
+
+# Autocomplete component
+
+import { Playground, Props } from "docz";
+import { AutocompleteSelect } from "./AutocompleteSelect.jsx";
+import { Input } from "../../TestingComponentComposition/Input/Input";
+import { AutoCompleteList } from "../../TestingComponentComposition/AutocompleteList";
+import { AutoCompleteLabelList } from "../../TestingComponentComposition/AutoCompleteLabelList";
+import tableData from "../../Mock/Table.json";
+
+# Exemple
+
+Current data is load by a json file so don't change tableData.
+
+Current css framework used is Tailwindcss but in a real usecase, you can use whatever you want
+
+<Playground>
+  {() => {
+    const [data, setData] = React.useState([]);
+    const [selectedData, setSelectedData] = React.useState([]);
+    React.useEffect(() => {
+      const dataModified = tableData.reduce((arr, items) => {
+        data.push({
+          ...items,
+          searchable: `${items.prenom} ${items.nom}`,
+          selected: false,
+        });
+      }, tableData[0]);
+    }, []);
+    let selectItem = (item) => {
+      const array = selectedData;
+      item.selected = true;
+      array.push(item);
+      setSelectedData(array);
+    };
+    let removeItem = (item, index) => {
+      const array = selectedData;
+      console.log(index);
+      item.selected = false;
+      array.splice(index, 1);
+      setSelectedData(array);
+    };
+    return (
+      <AutocompleteSelect
+        items={data}
+        class="flex cursor-pointer flex-wrap my-2 w-full"
+        selectedItems={selectedData}
+        Label={
+          <AutoCompleteLabelList
+            onClick={(item, index) => removeItem(item, index)}
+          />
+        }
+        searchInput={
+          <Input placeHolder="Searching" searchableValue={["searchable"]} />
+        }
+        listComponent={
+          <AutoCompleteList onClick={(item) => selectItem(item)} />
+        }
+      />
+    );
+  }}
+</Playground>

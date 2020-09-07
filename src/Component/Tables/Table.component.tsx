@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { usePagination } from "../../Common/Hooks/Pagination";
 import { useSortableData } from "../../Common/Hooks/Sort";
 import { TableTop } from "./TableTop.component";
-import { useTableSearch } from "../../Common/Hooks/Searchable";
+import { useSearch } from "../../Common/Hooks/Searchable";
 import { TableBot } from "./TableBot.component";
 import { TableHead } from "./TableHead.component";
 
@@ -56,7 +56,7 @@ const Table = (props: TableProps) => {
   const [itemsPerPage, setItemsPerPage] = useState(props.itemsPerPage);
   const [searchVal, setSearchValue] = useState(null);
   const { items, requestSort, sortConfig } = useSortableData(props.data);
-  const { filteredData } = useTableSearch(
+  const { filteredData } = useSearch(
     searchVal,
     items,
     props.component?.top?.props.searchInput.props.searchableValue || []
@@ -68,7 +68,7 @@ const Table = (props: TableProps) => {
     maxPage,
     currentPage,
     jump,
-  } = usePagination(filteredData, itemsPerPage);
+  } = usePagination(filteredData(false), itemsPerPage);
 
   return (
     <>

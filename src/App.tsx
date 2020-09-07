@@ -5,9 +5,9 @@ import { Table } from "./Component/Tables/Table.component";
 import { Button } from "./TestingComponentComposition/Button";
 import { InputTable } from "./TestingComponentComposition/Input/InputTable";
 import { Input } from "./TestingComponentComposition/Input/Input";
-import { TopBar } from "./TestingComponentComposition/TopBar";
+import { TopBar } from "./TestingComponentComposition/Table/TopBar";
 import { Select } from "./TestingComponentComposition/Select";
-import { BottomBar } from "./TestingComponentComposition/BottomBar";
+import { BottomBar } from "./TestingComponentComposition/Table/BottomBar";
 function App() {
   return (
     <div className="h-screen bg-red-400">

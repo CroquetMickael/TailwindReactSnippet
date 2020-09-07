@@ -1,13 +1,15 @@
-export const useTableSearch = (searchVal, datas, searchableValues) => {
+export const useSearch = (searchVal, datas, searchableValues) => {
   let result = [];
 
-  function getEachItem() {
+  function getEachItem(autocomplete) {
     if (searchVal && searchableValues.length) {
       datas.forEach((item) => {
         searchItem(item);
       });
       let uniqueResults = [...new Set(result)];
       return uniqueResults;
+    } else if (autocomplete) {
+      return [];
     } else {
       return datas;
     }
@@ -27,5 +29,5 @@ export const useTableSearch = (searchVal, datas, searchableValues) => {
     });
   }
 
-  return { filteredData: getEachItem() };
+  return { filteredData: (autocomplete) => getEachItem(autocomplete) };
 };
