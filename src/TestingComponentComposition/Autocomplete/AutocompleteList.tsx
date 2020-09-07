@@ -1,9 +1,13 @@
 import React from "react";
 
-const AutoCompleteList = (props) => {
+interface AutoCompleteListProps {
+  data?: any[];
+  onClick: (item: any) => void;
+}
+const AutoCompleteList = (props: AutoCompleteListProps) => {
   return (
     <div className="bg-white border border-gray-700">
-      {props.data.map((item, index) =>
+      {props.data?.map((item: any, index: number) =>
         item.selected === true ? (
           <p
             className="bg-white border-b border-gray-400 text-gray-400 p-2"

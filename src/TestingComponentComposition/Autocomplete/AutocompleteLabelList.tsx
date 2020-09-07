@@ -1,10 +1,11 @@
 import React from "react";
 
-const AutoCompleteLabelList = (props) => {
-  const onClick = (item, index) => {
-    props.onClick(item, index);
-    props.setSearchable("");
-  };
+interface AutoCompleteListProps {
+  data?: any[];
+  onClick: (item: any, index: number) => void;
+}
+
+const AutoCompleteLabelList = (props: AutoCompleteListProps) => {
   return (
     <>
       {props.data?.length ? (
@@ -13,7 +14,7 @@ const AutoCompleteLabelList = (props) => {
             {item.searchable}
             <span
               className="cursor-pointer mx-2"
-              onClick={() => onClick(item, index)}
+              onClick={() => props.onClick(item, index)}
             >
               X
             </span>
