@@ -143,6 +143,7 @@ Current css framework used is Tailwindcss but in a real usecase, you can use wha
 
 <Playground>
   {() => {
+    // State of component
     const [data, setData] = React.useState([]);
     const [selectedData, setSelectedData] = React.useState([]);
     React.useEffect(() => {
@@ -166,9 +167,11 @@ Current css framework used is Tailwindcss but in a real usecase, you can use wha
       array.splice(index, 1);
       setSelectedData([...array]);
     };
+    // End of state of component
     return (
       <AutocompleteSelect
         items={data}
+        activeClass="bg-gray-400"
         class="flex flex-wrap w-full py-2"
         selectedItems={selectedData}
         label={

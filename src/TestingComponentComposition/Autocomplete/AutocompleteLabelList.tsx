@@ -11,12 +11,13 @@ const AutoCompleteLabelList = (props: AutoCompleteListProps) => {
       {props.data?.length ? (
         props.data.map((item, index) => (
           <>
-            <div className="bg-gray-300 w-1/6 my-1 ml-1 p-1" key={index}>
+            <div className="w-1/6 p-1 my-1 ml-1 bg-gray-300" key={index}>
               {item.searchable}
             </div>
             <button
-              className="cursor-pointer p-1 my-1 mr-1 bg-red-400 hover:bg-red-600"
+              className="p-1 my-1 mr-1 bg-red-400 cursor-pointer hover:bg-red-600"
               onClick={() => props.onClick(item, index)}
+              key={`button_${index}`}
             >
               X
             </button>
