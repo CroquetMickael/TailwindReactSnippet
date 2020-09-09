@@ -2,27 +2,30 @@ import React, { useState } from "react";
 import { useSearch } from "../../Common/Hooks/Searchable";
 
 const AutocompleteSelect = (props) => {
-  const [searchVal, setSearchValue] = useState(null);
+  const [searchValue, setSearchValue] = useState(null);
   const { filteredData } = useSearch(
-    searchVal,
+    searchValue,
     props.items,
     props.searchInput?.props.searchableValue || []
   );
   return (
     <>
       <div className={props.class}>
-        {React.cloneElement(props.Label, {
-          data: props.selectedItems,
-          setSearchable: setSearchValue,
-        })}
-        {props.searchInput !== undefined
-          ? React.cloneElement(props.searchInput, {
-              onChange: (e) => {
-                setSearchValue(e.target.value);
-              },
-              value: searchVal,
+        {props.label !== undefined
+          ? React.cloneElement(props.label, {
+              data: props.selectedItems,
+              setSearchable: setSearchValue,
             })
           : null}
+        {React.cloneElement(props.searchInput, {
+          onChange: (e) => {
+            setSearchValue(e.target.value);
+          },
+          value: searchValue,
+          onClick: () => {
+            setSearchValue("");
+          },
+        })}
       </div>
       {React.cloneElement(props.listComponent, {
         data: filteredData(true),
